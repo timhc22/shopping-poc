@@ -1,15 +1,27 @@
 import React from 'react';
 import './App.css';
-import BuyerInterface from "./components/BuyerInterface";
-import SellerInterface from "./components/SellerInterface";
+import BuyerPage from "./pages/BuyerPage/BuyerPage";
+import SellerPage from "./pages/SellerPage/SellerPage";
+import DashboardPage from './pages/DashboardPage/DashboardPage';
 
-function App() {
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
+
+function App() : JSX.Element {
   return (
     <div className="App">
-      <div className="App-body">
-        <BuyerInterface></BuyerInterface>
-        <SellerInterface></SellerInterface>
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={DashboardPage} />
+          <Route exact path="/buyer" component={BuyerPage} />
+          <Route exact path="/seller" component={SellerPage} />
+          <Redirect to="/" />
+        </Switch>
+      </Router>
     </div>
   );
 }
