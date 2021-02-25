@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Item from './Item';
-import { getItemsByItemListStatusFilter } from '../selectors';
+import { getItemsByItemListStatusFilter } from '../redux/selectors';
 
 const ForSaleList = ({ items }: any) => (
   <ul className="item-list">

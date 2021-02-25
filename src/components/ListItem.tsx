@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { listItem } from '../actions';
+import { listItem } from '../redux/actions';
 
 interface ListItemProps {
   listItem?: any;
