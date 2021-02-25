@@ -23,14 +23,15 @@ export default function(state: any = initialState, action: any) {
       };
     }
     case TOGGLE_ITEM_STATUS: {
-      const { id } = action.payload;
+      const { id, buyerId } = action.payload;
       return {
         ...state,
         byIds: {
           ...state.byIds,
           [id]: {
             ...state.byIds[id],
-            sold: !state.byIds[id].sold
+            sold: !state.byIds[id].sold,
+            buyerId: buyerId
           }
         }
       }

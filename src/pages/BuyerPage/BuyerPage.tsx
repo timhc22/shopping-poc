@@ -14,7 +14,7 @@ export default function BuyerPage(props: any): JSX.Element {
 
       <h1>Buyer {buyerId}</h1>
       <ItemStateFilters />
-      <ForSaleList />
+      <ForSaleList buyerId={buyerId}/>
     </div>
   );
 }

@@ -3,7 +3,14 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 import { toggleItemStatus } from '../redux/actions'
 
-const Item = ({ item, toggleItemStatus, readOnly = false }: any) => {
+type ItemProps = {
+  item: string;
+  toggleItemStatus?: any; // todo this is a function
+  readOnly?: boolean;
+  buyerId?: number; // optional as won't include an id until it is bought
+}
+
+const Item = ({ item, toggleItemStatus, readOnly = false, buyerId }: any) => {
 
   if (readOnly) {
     return (
@@ -13,7 +20,7 @@ const Item = ({ item, toggleItemStatus, readOnly = false }: any) => {
     )
   } else {
     return (
-      <li className="item" onClick={() => toggleItemStatus(item.id)}>
+      <li className="item" onClick={() => toggleItemStatus(item.id, buyerId)}>
         <button className="buy-sell-button">{item && item.sold ? 'Sell' : 'Buy'}</button>
         <span
           className={cx(
@@ -22,6 +29,9 @@ const Item = ({ item, toggleItemStatus, readOnly = false }: any) => {
           )}
         >
         {item.content}
+        </span>
+        <span>
+          {item.buyerId ? item.buyerId : 'no buyer'}
         </span>
       </li>
     )

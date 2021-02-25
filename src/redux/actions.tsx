@@ -15,9 +15,9 @@ export const listItem = (sellerId: number, content: any) => ({
   }
 });
 
-export const toggleItemStatus = (id: number) => ({
+export const toggleItemStatus = (id: number, buyerId: number) => ({
   type: TOGGLE_ITEM_STATUS,
-  payload: { id }
+  payload: { id, buyerId }
 });
 
 export const setItemStateFilter = (itemStateFilter: any) => ({
