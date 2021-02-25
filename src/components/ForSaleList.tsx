@@ -1,13 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Item as ItemType } from '../types/Item';
 import Item from './Item';
 import { getItemsByItemListStateFilter } from '../redux/selectors';
-
-type ItemType = {
-  id: number;
-  content: string;
-  price: number;
-}
 
 type ForSaleListProps = {
   items?: ItemType[];
@@ -20,14 +15,14 @@ const ForSaleList = ({ items, readOnly = false, buyerId, sellerId }: ForSaleList
 
   // when listing the seller's own for sale items
   if (items && sellerId) {
-    items = items.filter((item: ItemType) => sellerId === item.id);
+    items = items.filter((item: ItemType) => sellerId === item.sellerId);
   }
 
   return (
     <ul className="item-list">
       {items && items.length
         ? items.map((item: any, index: number) => {
-          return <Item key={`item-${item.id}`} item={item} readOnly={readOnly} buyerId={buyerId} />;
+          return <Item key={`item-${item.id}`} item={item} readOnly={readOnly} sellerId={sellerId} buyerId={buyerId} />;
         })
         : 'Empty' }
     </ul>

@@ -7,10 +7,11 @@ type ItemProps = {
   item: any;
   toggleItemStatus?: any; // todo this is a function
   readOnly?: boolean;
+  sellerId?: number;
   buyerId?: number; // optional as won't include an id until it is bought
 }
 
-const Item = ({ item, toggleItemStatus, readOnly = false, buyerId }: ItemProps) => {
+const Item = ({ item, toggleItemStatus, readOnly = false, sellerId, buyerId }: ItemProps) => {
 
   if (readOnly) {
     return (
@@ -18,6 +19,8 @@ const Item = ({ item, toggleItemStatus, readOnly = false, buyerId }: ItemProps) 
         <span>Item: {item.content},</span>
         <span>&nbsp;</span>
         <span>Price: £{item.price},</span>
+        <span>&nbsp;</span>
+        <span>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'},</span>
         <span>&nbsp;</span>
         <span>{item.buyerId ? `Buyer: ${item.buyerId}` : 'Buyer: no buyer'}</span>
       </li>
@@ -40,6 +43,8 @@ const Item = ({ item, toggleItemStatus, readOnly = false, buyerId }: ItemProps) 
           'item__text',
           item && item.sold && 'item__text--sold'
         )}>Price: £{item.price},</span>
+        <span>&nbsp;</span>
+        <span>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'}</span>
         <span>&nbsp;</span>
         <span>
           {item.buyerId ? `Buyer: ${item.buyerId}` : 'Buyer: no buyer'}
