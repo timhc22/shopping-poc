@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { listItem } from '../redux/actions';
 
-interface ListItemProps {
+type ListItemProps = {
   listItem?: any;
   sellerId?: number;
 }
 
-interface ListItemState {
+type ListItemState = {
   input?: any;
   sellerId: number
 }

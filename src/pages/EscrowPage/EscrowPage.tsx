@@ -13,7 +13,7 @@ export default function EscrowPage(): JSX.Element {
 
       <h1>Escrow</h1>
       <ItemStateFilters />
-      <ForSaleList />
+      <ForSaleList readOnly={true} />
     </div>
   );
 }

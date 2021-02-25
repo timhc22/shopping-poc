@@ -3,11 +3,16 @@ import { connect } from 'react-redux';
 import Item from './Item';
 import { getItemsByItemListStateFilter } from '../redux/selectors';
 
-const ForSaleList = ({ items }: any) => (
+type ForSaleListProps = {
+  items?: typeof Item[];
+  readOnly?: boolean;
+}
+
+const ForSaleList = ({ items, readOnly = false }: ForSaleListProps ) => (
   <ul className="item-list">
     {items && items.length
       ? items.map((item: any, index: number) => {
-        return <Item key={`item-${item.id}`} item={item} />;
+        return <Item key={`item-${item.id}`} item={item} readOnly={readOnly} />;
       })
       : 'Empty' }
   </ul>

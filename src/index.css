@@ -40,3 +40,7 @@ code {
 .item-state-filter--active {
   border-bottom: 1px solid black;
 }
+
+.buy-sell-button {
+  cursor: pointer;
+}
