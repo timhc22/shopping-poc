@@ -1,1 +1,2 @@
 export const LIST_ITEM = 'LIST_ITEM';
+export const SET_ITEM_STATE_FILTER = 'SET_ITEM_STATE_FILTER';

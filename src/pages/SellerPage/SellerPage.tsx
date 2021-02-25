@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ListItem from "../../components/ListItem";
 
 export default function SellerPage(): JSX.Element {
 
@@ -11,6 +12,7 @@ export default function SellerPage(): JSX.Element {
 
       <h1>Seller</h1>
       Test
+      <ListItem />
     </div>
   );
 }

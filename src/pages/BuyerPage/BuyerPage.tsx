@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ForSaleList from "../../components/ForSaleList";
 
 export default function BuyerPage(): JSX.Element {
 
@@ -11,6 +12,7 @@ export default function BuyerPage(): JSX.Element {
 
       <h1>Buyer</h1>
       Test
+      <ForSaleList />
     </div>
   );
 }
