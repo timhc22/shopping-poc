@@ -4,25 +4,27 @@ import { listItem } from '../redux/actions';
 
 interface ListItemProps {
   listItem?: any;
+  sellerId?: number;
 }
 
 interface ListItemState {
-  input?: any
+  input?: any;
+  sellerId: number
 }
 
 class ListItem extends React.Component<ListItemProps, ListItemState> {
   constructor(props: any) {
     super(props);
-    this.state = { input: "" };
+    this.state = { input: "", sellerId: props.sellerId };
   }
 
   updateInput = (input: any) => {
-    this.setState({ input });
+    this.setState({ ...this.state,  input: input });
   }
 
   handleListItem = () => {
-    this.props.listItem(this.state.input);
-    this.setState({ input: "" });
+    this.props.listItem(this.state.sellerId, this.state.input);
+    this.setState({ ...this.state,  input: "" });
   };
 
   render() {

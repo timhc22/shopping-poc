@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ListItem from "../../components/ListItem";
 
-export default function SellerPage(): JSX.Element {
+export default function SellerPage(props: any): JSX.Element {
+  const sellerId = parseInt(props.match.params.id);
 
   return (
     <div>
@@ -10,8 +11,8 @@ export default function SellerPage(): JSX.Element {
         &larr; Back
       </Link>
 
-      <h1>Seller</h1>
-      <ListItem />
+      <h1>Seller {sellerId}</h1>
+      <ListItem sellerId={sellerId} />
     </div>
   );
 }

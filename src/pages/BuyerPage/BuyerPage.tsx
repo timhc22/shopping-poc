@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import ForSaleList from "../../components/ForSaleList";
 import ItemStateFilters from "../../components/ItemStateFilters";
 
-export default function BuyerPage(): JSX.Element {
+export default function BuyerPage(props: any): JSX.Element {
+  const buyerId = parseInt(props.match.params.id);
 
   return (
     <div>
@@ -11,7 +12,7 @@ export default function BuyerPage(): JSX.Element {
         &larr; Back
       </Link>
 
-      <h1>Buyer</h1>
+      <h1>Buyer {buyerId}</h1>
       <ItemStateFilters />
       <ForSaleList />
     </div>

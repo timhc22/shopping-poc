@@ -8,7 +8,7 @@ const initialState = {
 export default function(state: any = initialState, action: any) {
   switch (action.type) {
     case LIST_ITEM: {
-      const { id, content } = action.payload;
+      const { id, content, sellerId } = action.payload;
       return {
         ...state,
         allIds: [...state.allIds, id],
@@ -16,6 +16,7 @@ export default function(state: any = initialState, action: any) {
           ...state.byIds,
           [id]: {
             content,
+            sellerId,
             sold: false
           }
         }
