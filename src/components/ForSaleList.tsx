@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Item from './Item';
-import { getItemsByItemListStatusFilter } from '../redux/selectors';
+import { getItemsByItemListStateFilter } from '../redux/selectors';
 
 const ForSaleList = ({ items }: any) => (
   <ul className="item-list">
@@ -9,13 +9,13 @@ const ForSaleList = ({ items }: any) => (
       ? items.map((item: any, index: number) => {
         return <Item key={`item-${item.id}`} item={item} />;
       })
-      : 'Nothing for sale yet' }
+      : 'Empty' }
   </ul>
 );
 
 const mapStateToProps = (state: any) => {
-  const { itemListStateFilter } = state;
-  const items = getItemsByItemListStatusFilter(state, itemListStateFilter);
+  const { itemStateFilter } = state;
+  const items = getItemsByItemListStateFilter(state, itemStateFilter);
   return { items };
 }
 
