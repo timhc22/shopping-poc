@@ -9,16 +9,29 @@ export default function DashboardPage(): JSX.Element {
       <h1>Boson Protocol</h1>
       <div>
         <section className="container">
-          <h2>Buyer</h2>
-          <Link to="/buyer" className="button">
+          <h2>Buyers</h2>
+          <Link to="/buyer/1" className="button">
             Buyer 1
+          </Link>
+          <br/>
+          <Link to="/buyer/2" className="button">
+            Buyer 2
           </Link>
 
           <Divider orientation="horizontal" flexItem />
 
-          <h2>Seller</h2>
-          <Link to="/seller" className="button">
+          <h2>Sellers</h2>
+          <Link to="/seller/1" className="button">
             Seller 1
+          </Link>
+          <br/>
+          <Link to="/seller/2" className="button">
+            Seller 2
+          </Link>
+
+          <h2>Escrow</h2>
+          <Link to="/escrow" className="button">
+            Escrow
           </Link>
         </section>
       </div>
