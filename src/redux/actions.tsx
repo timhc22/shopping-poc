@@ -6,12 +6,13 @@ import {
 
 let nextItemId = 0;
 
-export const listItem = (sellerId: number, content: any) => ({
+export const listItem = (sellerId: number, content: any, price: number) => ({
   type: LIST_ITEM,
   payload: {
     id: ++nextItemId,
     sellerId,
     content,
+    price
   }
 });
 
