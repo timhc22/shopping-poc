@@ -11,7 +11,6 @@ export default function SellerPage(): JSX.Element {
       </Link>
 
       <h1>Seller</h1>
-      Test
       <ListItem />
     </div>
   );

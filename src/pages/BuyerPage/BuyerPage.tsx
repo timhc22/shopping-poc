@@ -12,9 +12,8 @@ export default function BuyerPage(): JSX.Element {
       </Link>
 
       <h1>Buyer</h1>
-      Test
-      <ForSaleList />
       <ItemStateFilters />
+      <ForSaleList />
     </div>
   );
 }
