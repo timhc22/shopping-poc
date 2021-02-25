@@ -18,7 +18,7 @@ const Item = ({ item, toggleItemStatus, readOnly = false, sellerId, buyerId }: I
       <li className="item">
         <span>Item: {item.content},</span>
         <span>&nbsp;</span>
-        <span>Price: £{item.price},</span>
+        <span>Price: {item.price}$BSN,</span>
         <span>&nbsp;</span>
         <span>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'},</span>
         <span>&nbsp;</span>
@@ -28,7 +28,7 @@ const Item = ({ item, toggleItemStatus, readOnly = false, sellerId, buyerId }: I
   } else {
     return (
       <li className="item" onClick={() => toggleItemStatus(item.id, buyerId)}>
-        {item && item.sold ? item.buyerId === buyerId ? <button className="buy-sell-button">Sell</button> : '' : <button className="buy-sell-button">Buy</button>}
+        {item && item.sold ? item.buyerId === buyerId ? <button className="buy-sell-button">Sell</button> : '' : <button className="buy-sell-button">Order</button>}
         <span>&nbsp;</span>
         <span
           className={cx(
@@ -42,7 +42,7 @@ const Item = ({ item, toggleItemStatus, readOnly = false, sellerId, buyerId }: I
         <span className={cx(
           'item__text',
           item && item.sold && 'item__text--sold'
-        )}>Price: £{item.price},</span>
+        )}>Price: {item.price}$BSN,</span>
         <span>&nbsp;</span>
         <span>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'}</span>
         <span>&nbsp;</span>
