@@ -10,7 +10,7 @@ type ItemProps = {
   buyerId?: number; // optional as won't include an id until it is bought
 }
 
-const Item = ({ item, toggleItemStatus, readOnly = false, buyerId }: any) => {
+const Item = ({ item, toggleItemStatus, readOnly = false, buyerId }: ItemProps) => {
 
   if (readOnly) {
     return (
