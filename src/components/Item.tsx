@@ -5,7 +5,7 @@ import { toggleItemStatus } from '../redux/actions'
 
 const Item = ({ item, toggleItemStatus }: any) => (
   <li className="item" onClick={() => toggleItemStatus(item.id)}>
-    {item && item.sold ? 'SOLD' : 'NOT SOLD'}{''}
+    {item && item.sold ? <button>Sell</button> : <button>Buy</button>}{''}
     <span
       className={cx(
         'item__text',
