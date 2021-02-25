@@ -6,7 +6,7 @@ const initialState = ITEM_STATE_FILTERS.ALL;
 const itemStateFilter = (state: string = initialState, action: any) => {
   switch (action.type) {
     case SET_ITEM_STATE_FILTER: {
-      return action.payload.filter;
+      return action.payload.itemStateFilter;
     }
     default: {
       return state;

@@ -16,7 +16,7 @@ export default function(state: any = initialState, action: any) {
           ...state.byIds,
           [id]: {
             content,
-            listed: false
+            sold: false
           }
         }
       };
