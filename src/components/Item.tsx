@@ -36,9 +36,9 @@ const Item = ({ item, toggleItemStatus, dispatchItem, complainItem, completeItem
       <tr className="item">
         <td>
           {(buyerId && item && !item.sold) ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Order</button> : '' }
-          {(buyerId && item.buyerId === buyerId && item.dispatched !== true) ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Cancel</button> : ''}
-          {(buyerId && item.buyerId === buyerId && item.dispatched === true && (item.complete !== true || item.complained !== true) ) ? <button onClick={() => completeItem(item.id)} className="buy-sell-button">Complete</button> : ''}
-          {(buyerId && item.buyerId === buyerId && item.dispatched === true && (item.complete !== true || item.complained !== true) ) ? <button onClick={() => complainItem(item.id)} className="buy-sell-button">Complain</button> : ''}
+          {item.buyerId === buyerId && !item.dispatched ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Cancel</button> : ''}
+          {item.buyerId === buyerId && item.dispatched && (!item.complete && !item.complained) ? <button onClick={() => completeItem(item.id)} className="buy-sell-button">Complete</button> : ''}
+          {item.buyerId === buyerId && item.dispatched && (!item.complete && !item.complained) ? <button onClick={() => complainItem(item.id)} className="buy-sell-button">Complain</button> : ''}
         </td>
         <td
           className={cx(
@@ -59,8 +59,11 @@ const Item = ({ item, toggleItemStatus, dispatchItem, complainItem, completeItem
         <td>
           { item.sold === false ? `Status: unsold` : ''}
           { item.sold && item.dispatched !== true ? `Status: sold | awaiting dispatch...` : ''}
-          { (item.sold && item.buyerId === buyerId && item.dispatched) ? 'Dispatched!' : ''}
-          { (item.sold && item.sellerId === sellerId && item.dispatched) ? 'Completed!' : ''}
+          { item.dispatched ? 'Dispatched! | awaiting completion...' : ''}
+
+          { (item.complete) ? 'Complete!' : ''}
+          { (item.complained) ? 'Complained!' : ''}
+
           { (item.dispatched !== true && item.sold && item.sellerId === sellerId) ? <button onClick={() => dispatchItem(item.id)} className="buy-sell-button">Dispatch</button> : ''}
         </td>
       </tr>

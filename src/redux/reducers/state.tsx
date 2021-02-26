@@ -79,14 +79,11 @@ export default function(state: any = initialState, action: any) {
     }
     case DISPATCH_ITEM: {
       const { id } = action.payload;
-      newState = {};
       item = state.byIds[id];
-
       console.log('is dispatched');
-      // newState = addTransaction(state, 'seller', item.sellerId, item.price, 'credit');
 
-      newState = {
-        ...newState,
+      return {
+        ...state,
         // can use state here as have only changed the transactions states above
         byIds: {
           ...state.byIds,
@@ -96,15 +93,13 @@ export default function(state: any = initialState, action: any) {
           }
         }
       }
-      return newState;
     }
     case COMPLETE_ITEM: {
       const { id } = action.payload;
       newState = {};
       item = state.byIds[id];
-
-      console.log('is complete');
       newState = addTransaction(state, 'seller', item.sellerId, item.price, 'credit');
+      console.log('is complete');
 
       newState = {
         ...newState,
@@ -123,9 +118,8 @@ export default function(state: any = initialState, action: any) {
       const { id } = action.payload;
       newState = {};
       item = state.byIds[id];
-
-      console.log('is complained');
       newState = addTransaction(state, 'buyer', item.buyerId, item.price, 'credit');
+      console.log('is complained');
 
       newState = {
         ...newState,
