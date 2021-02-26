@@ -9,11 +9,6 @@ type UserBalanceProps = {
 }
 
 const UserBalance = ({ transactions, type, id }: UserBalanceProps ) => {
-
-  console.log(transactions);
-  console.log(id);
-  console.log(type);
-
   if (type == '' && id == '') {
     return (
       <table className="transactions table-style">
