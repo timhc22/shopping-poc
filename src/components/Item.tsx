@@ -32,7 +32,7 @@ const Item = ({ item, toggleItemStatus, dispatchItem, readOnly = false, sellerId
       <tr className="item">
         <td>
           {(buyerId && item && !item.sold) ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Order</button> : '' }
-          {(buyerId && item.buyerId === buyerId) ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Cancel</button> : ''}
+          {(buyerId && item.buyerId === buyerId && item.dispatched !== true) ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Cancel</button> : ''}
         </td>
         <td
           className={cx(
@@ -51,9 +51,11 @@ const Item = ({ item, toggleItemStatus, dispatchItem, readOnly = false, sellerId
           {item.buyerId ? `Buyer: ${item.buyerId}` : 'Buyer: no buyer'}
         </td>
         <td>
-          {item.sold ? `Status: sold | awaiting dispatch...` : 'Status: unsold'}
+          { item.sold === false ? `Status: unsold` : ''}
+          { item.sold && item.dispatched !== true ? `Status: sold | awaiting dispatch...` : ''}
           { (item.sold && item.buyerId === buyerId && item.dispatched) ? 'Dispatched!' : ''}
-          { (item.sold && item.sellerId === sellerId) ? <button onClick={() => dispatchItem(item.id)} className="buy-sell-button">Dispatch</button> : ''}
+          { (item.sold && item.sellerId === sellerId && item.dispatched) ? 'Completed!' : ''}
+          { (item.dispatched !== true && item.sold && item.sellerId === sellerId) ? <button onClick={() => dispatchItem(item.id)} className="buy-sell-button">Dispatch</button> : ''}
         </td>
       </tr>
     )

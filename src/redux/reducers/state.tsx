@@ -80,10 +80,8 @@ export default function(state: any = initialState, action: any) {
       newState = {};
       item = state.byIds[id];
 
-      if (item.dispatched) {
-        console.log('is dispatched');
-        newState = addTransaction(state, 'seller', item.sellerId, item.price, 'credit');
-      }
+      console.log('is dispatched');
+      newState = addTransaction(state, 'seller', item.sellerId, item.price, 'credit');
 
       newState = {
         ...newState,
@@ -122,6 +120,13 @@ export default function(state: any = initialState, action: any) {
  */
 function addTransaction(state: any, type: string, id: number, amount: number, transactionType: string) {
   const now = Date.now();
+  console.log('here');
+  console.log(state);
+  console.log(type);
+  console.log(id);
+  console.log(amount);
+  console.log(transactionType);
+
   return {
     ...state,
       allTimestamps: [...state.allTimestamps, now],

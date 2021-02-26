@@ -16,7 +16,7 @@ export default function SellerPage(props: any): JSX.Element {
       </Link>
 
       <h1>Seller {sellerId}</h1>
-      {/*<UserBalance type="seller" id={sellerId}/>*/}
+      <UserBalance type="seller" id={sellerId}/>
       <br/>
       <ListItem sellerId={sellerId} />
       <br/>
@@ -25,7 +25,7 @@ export default function SellerPage(props: any): JSX.Element {
 
       <br/>
       <h3>Seller {sellerId} Transactions:</h3>
-      {/*<TransactionsList type="seller" id={sellerId}/>*/}
+      <TransactionsList type="seller" id={sellerId}/>
     </div>
   );
 }
