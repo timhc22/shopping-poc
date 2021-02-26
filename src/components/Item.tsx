@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 import { toggleItemStatus, dispatchItem, complainItem, completeItem } from '../redux/actions'
 import { Item as ItemType } from "../types/Item";
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import { Link } from "react-router-dom";
 
 type ItemProps = {
   item: ItemType;
@@ -21,52 +24,66 @@ const Item = ({ item, toggleItemStatus, dispatchItem, complainItem, completeItem
   // used for escrow
   if (readOnly) {
     return (
-      <tr className="item">
-        <td>Item: {item.content}</td>
-        <td>Price: {item.price}$BSN</td>
-        <td>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'}</td>
-        <td>{item.buyerId ? `Buyer: ${item.buyerId}` : 'Buyer: no buyer'}</td>
-        <td>
+      <TableRow className="item">
+        <TableCell>{item.content}</TableCell>
+        <TableCell>{item.price}$BSN</TableCell>
+        <TableCell>
+          <Link to={`/seller/${item.sellerId}`} className="button">
+            {item.sellerId ? `${item.sellerId}` : 'no seller'}
+          </Link>
+        </TableCell>
+        <TableCell>
+          <Link to={`/buyer/${item.buyerId}`} className="button">
+            {item.buyerId ? `${item.buyerId}` : 'no buyer'}
+          </Link>
+        </TableCell>
+        <TableCell>
           {item.sold ? `Status: sold ` : 'Status: unsold'} { (item.sold && item.buyerId === buyerId) || (item.sold && item.sellerId === sellerId) ? `| Dispatched: ${item.dispatched}` : ''}
-        </td>
-      </tr>
+        </TableCell>
+      </TableRow>
     )
   } else {
     return (
-      <tr className="item">
-        <td>
+      <TableRow className="item">
+        <TableCell>
           {(buyerId && item && !item.sold) ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Order</button> : '' }
           {item.buyerId === buyerId && !item.dispatched ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Cancel</button> : ''}
           {item.buyerId === buyerId && item.dispatched && (!item.complete && !item.complained) ? <button onClick={() => completeItem(item.id)} className="buy-sell-button">Complete</button> : ''}
           {item.buyerId === buyerId && item.dispatched && (!item.complete && !item.complained) ? <button onClick={() => complainItem(item.id)} className="buy-sell-button">Complain</button> : ''}
-        </td>
-        <td
+        </TableCell>
+        <TableCell
           className={cx(
             'item__text',
             item && item.sold && 'item__text--sold'
           )}
         >
-        Item: {item.content}
-        </td>
-        <td className={cx(
+        {item.content}
+        </TableCell>
+        <TableCell className={cx(
           'item__text',
           item && item.sold && 'item__text--sold'
-        )}>Price: {item.price}$BSN</td>
-        <td>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'}</td>
-        <td>
-          {item.buyerId ? `Buyer: ${item.buyerId}` : 'Buyer: no buyer'}
-        </td>
-        <td>
-          { item.sold === false ? `Status: unsold` : ''}
-          { item.sold && item.dispatched !== true ? `Status: sold | awaiting dispatch...` : ''}
+        )}>{item.price}$BSN</TableCell>
+        <TableCell>
+          <Link to={`/seller/${item.sellerId}`} className="button">
+            {item.sellerId ? `${item.sellerId}` : 'no seller'}
+          </Link>
+        </TableCell>
+        <TableCell>
+          <Link to={`/buyer/${item.buyerId}`} className="button">
+            {item.buyerId ? `${item.buyerId}` : 'no buyer'}
+          </Link>
+        </TableCell>
+        <TableCell>
+          { !item.sold ? `unsold` : ''}
+          { item.sold && !item.dispatched ? `sold | awaiting dispatch...` : ''}
           { item.dispatched ? 'Dispatched! | awaiting completion...' : ''}
 
           { (item.complete) ? 'Complete!' : ''}
           { (item.complained) ? 'Complained!' : ''}
 
-          { (item.dispatched !== true && item.sold && item.sellerId === sellerId) ? <button onClick={() => dispatchItem(item.id)} className="buy-sell-button">Dispatch</button> : ''}
-        </td>
-      </tr>
+          { (!item.dispatched && item.sold && item.sellerId === sellerId) ? <button onClick={() => dispatchItem(item.id)} className="buy-sell-button">Dispatch</button> : ''}
+        </TableCell>
+      </TableRow>
     )
   }
 };

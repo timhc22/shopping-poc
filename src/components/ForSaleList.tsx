@@ -3,6 +3,12 @@ import { connect } from 'react-redux';
 import { Item as ItemType } from '../types/Item';
 import Item from './Item';
 import { getItemsByItemListStateFilter } from '../redux/selectors';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 type ForSaleListProps = {
   items?: ItemType[];
@@ -19,15 +25,27 @@ const ForSaleList = ({ items, readOnly = false, buyerId, sellerId }: ForSaleList
   }
 
   return (
-    <table className="item-list table-style">
-      <tbody>
-      {items && items.length
-        ? items.map((item: any, index: number) => {
-          return <Item key={`item-${item.id}`} item={item} readOnly={readOnly} sellerId={sellerId} buyerId={buyerId} />;
-        })
-        : <tr><td>Empty</td></tr> }
-      </tbody>
-    </table>
+    <TableContainer >
+      <Table className="transactions table-style item-list" aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell>Item</TableCell>
+            <TableCell>Amount</TableCell>
+            <TableCell>Seller ID</TableCell>
+            <TableCell>Buyer ID</TableCell>
+            <TableCell>Status</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+        {items && items.length
+          ? items.map((item: any, index: number) => {
+            return <Item key={`item-${item.id}`} item={item} readOnly={readOnly} sellerId={sellerId} buyerId={buyerId} />;
+          })
+          : <TableRow><TableCell></TableCell><TableCell></TableCell><TableCell></TableCell><TableCell></TableCell><TableCell></TableCell><TableCell></TableCell></TableRow> }
+        </TableBody>
+      </Table>
+    </TableContainer>
   )
 };
 

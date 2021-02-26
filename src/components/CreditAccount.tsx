@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { creditAccount } from '../redux/actions';
+import {Button, Input} from "@material-ui/core";
 
 type CreditAccountProps = {
   creditAccount?: any;
@@ -9,7 +10,7 @@ type CreditAccountProps = {
 }
 
 type CreditAccountState = {
-  amount: number;
+  amount: number | null;
   id: number;
   type?: string;
 }
@@ -17,7 +18,7 @@ type CreditAccountState = {
 class CreditAccount extends React.Component<CreditAccountProps, CreditAccountState> {
   constructor(props: any) {
     super(props);
-    this.state = { type: props.type, amount: 10, id: props.id };
+    this.state = { type: props.type, amount: null, id: props.id };
   }
 
   addFunds = (input: any) => {
@@ -26,20 +27,20 @@ class CreditAccount extends React.Component<CreditAccountProps, CreditAccountSta
 
   handleCreditAccount = () => {
     this.props.creditAccount(this.state.type, this.state.id, this.state.amount);
-    this.setState({ ...this.state, amount: 10 });
+    this.setState({ ...this.state, amount: null });
   };
 
   render() {
     return (
       <div>
-        <input
+        <Input
           onChange={e => this.addFunds(e.target.value)}
           value={this.state.amount}
           placeholder="Amount"
         />
-        <button className="list-item" onClick={this.handleCreditAccount}>
+        <Button color="primary" variant="outlined" className="list-item" onClick={this.handleCreditAccount}>
           Add Funds
-        </button>
+        </Button>
       </div>
     )
   }

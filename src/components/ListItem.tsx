@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { listItem } from '../redux/actions';
+import {Button, Input} from "@material-ui/core";
 
 type ListItemProps = {
   listItem?: any;
@@ -8,15 +9,15 @@ type ListItemProps = {
 }
 
 type ListItemState = {
-  input?: any;
+  input?: string | null;
   sellerId: number;
-  price: number;
+  price: number | null;
 }
 
 class ListItem extends React.Component<ListItemProps, ListItemState> {
   constructor(props: any) {
     super(props);
-    this.state = { input: "", price: 10, sellerId: props.sellerId };
+    this.state = { input: "", price: null, sellerId: props.sellerId };
   }
 
   updateInput = (input: any) => {
@@ -29,25 +30,25 @@ class ListItem extends React.Component<ListItemProps, ListItemState> {
 
   handleListItem = () => {
     this.props.listItem(this.state.sellerId, this.state.input, this.state.price);
-    this.setState({ ...this.state,  input: "", price: 10 });
+    this.setState({ ...this.state,  input: null, price: null });
   };
 
   render() {
     return (
       <div>
-        <input
+        <Input
           onChange={e => this.updateInput(e.target.value)}
           value={this.state.input}
           placeholder="Item"
         />
-        <input
+        <Input
           onChange={e => this.updatePrice(e.target.value)}
           value={this.state.price}
           placeholder="Price"
         />
-        <button className="list-item" onClick={this.handleListItem}>
+        <Button color="primary" variant="outlined" className="list-item" onClick={this.handleListItem}>
           List Item
-        </button>
+        </Button>
       </div>
     )
   }

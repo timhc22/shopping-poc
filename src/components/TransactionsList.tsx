@@ -1,6 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Transaction as TransactionType } from "../types/Transaction";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 type TransactionsProps = {
   transactions: TransactionType[],
@@ -12,19 +18,29 @@ const TransactionsList = ({ transactions, type, id }: TransactionsProps ) => {
   if (type == '' && id == '') {
     console.log(transactions);
     return (
-      <table className="transactions table-style">
-        <tbody>
-        { transactions.slice(0).reverse().map((t: TransactionType) => (
-        <tr key={t.timestamp}>
-          <td>Timestamp: {t.timestamp}&emsp;</td>
-          <td>Id: {t.type}&nbsp;</td>
-          <td>{t.id}&emsp;</td>
-          <td>Transaction: {t.transactionType}&nbsp;</td>
-          <td>{t.amount}&emsp;</td>
-        </tr>
-        ))}
-        </tbody>
-      </table>
+
+      <TableContainer>
+        <Table className="transactions table-style" aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Timestamp</TableCell>
+              <TableCell>Id</TableCell>
+              <TableCell>Transaction</TableCell>
+              <TableCell>Amount</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+          { transactions.slice(0).reverse().map((t: TransactionType) => (
+          <TableRow key={t.timestamp}>
+            <TableCell>{t.timestamp}&emsp;</TableCell>
+            <TableCell>{t.type}&nbsp;{t.id}&emsp;</TableCell>
+            <TableCell>{t.transactionType}&nbsp;</TableCell>
+            <TableCell>{t.amount}&emsp;</TableCell>
+          </TableRow>
+          ))}
+          </TableBody>
+      </Table>
+      </TableContainer>
     )
   }
 
@@ -41,22 +57,29 @@ const TransactionsList = ({ transactions, type, id }: TransactionsProps ) => {
   if (userTransactions.length !== 0) {
 
     return (
-      <table className="transactions table-style">
-        <tbody>
-
-        {/* todo WHY CAN'T I MAKE THIS A TRANSACTIONTYPE?? have to use any */}
-
-        {userTransactions.slice(0).reverse().map((tr: any) => (
-          <tr key={tr.timestamp}>
-            <td>Timestamp: {tr.timestamp}&emsp;</td>
-            <td>Id: {tr.type}&nbsp;</td>
-            <td>{tr.id}&emsp;</td>
-            <td>Transaction: {tr.transactionType}&nbsp;</td>
-            <td>{tr.amount}$BSN&emsp;</td>
-          </tr>
-        ))}
-        </tbody>
-      </table>
+      <TableContainer>
+        <Table className="transactions table-style" aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Timestamp</TableCell>
+              <TableCell>Id</TableCell>
+              <TableCell>Type</TableCell>
+              <TableCell>Amount</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {/* todo WHY CAN'T I MAKE THIS A TRANSACTIONTYPE?? have to use any */}
+            {userTransactions.slice(0).reverse().map((tr: any) => (
+              <TableRow key={tr.timestamp}>
+                <TableCell>{tr.timestamp}&emsp;</TableCell>
+                <TableCell>{tr.type}&nbsp;{tr.id}&emsp;</TableCell>
+                <TableCell>{tr.transactionType}&nbsp;</TableCell>
+                <TableCell>{tr.amount} $BSN&emsp;</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     )
   } else {
     return (
