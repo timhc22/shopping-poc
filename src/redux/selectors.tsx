@@ -1,3 +1,7 @@
+/**
+ * Items
+ */
+
 import { ITEM_STATE_FILTERS } from "../constants";
 
 export const getItemListState = (store: any) => store.items;
@@ -25,3 +29,19 @@ export const getItemsByItemListStateFilter = (store: any, statusFilter: any) => 
       return allItems;
   }
 }
+
+/**
+ * Transactions/Account Balances
+ */
+
+export const getTransactionsState = (store: any) => store.transactions;
+export const getTransactions = (store: any) =>
+  getTransactionsState(store) ? getTransactionsState(store).allTimestamps : [];
+
+export const getUserBalance = (store: any, type: string, id: number) => {
+  console.log('here');
+  console.log(store);
+  getTransactions(store) // todo return specifics
+}
+
+
