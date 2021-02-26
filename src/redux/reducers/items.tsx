@@ -1,8 +1,15 @@
 import { LIST_ITEM, TOGGLE_ITEM_STATUS } from '../actionTypes';
 
 const initialState = {
-  allIds: [],
-  byIds: {}
+  allIds: [1,2,3,4,5,6],
+  byIds: {
+    1: { content: 'Coffee', sellerId: 1, sold: false, price: 3, buyerId: null },
+    2: { content: 'T-Shirt', sellerId: 2, sold: false, price: 5, buyerId: null },
+    3: { content: 'Tea', sellerId: 1, sold: false, price: 2.5, buyerId: null },
+    4: { content: 'Cake', sellerId: 1, sold: false, price: 3.5, buyerId: null },
+    5: { content: 'Shorts', sellerId: 2, sold: false, price: 8, buyerId: null },
+    6: { content: 'Hoody', sellerId: 2, sold: false, price: 12, buyerId: null },
+  }
 }
 
 export default function(state: any = initialState, action: any) {
