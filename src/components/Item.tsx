@@ -1,18 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { toggleItemStatus, dispatchItem } from '../redux/actions'
+import { toggleItemStatus, dispatchItem, complainItem, completeItem } from '../redux/actions'
+import { Item as ItemType } from "../types/Item";
 
 type ItemProps = {
-  item: any;
-  toggleItemStatus?: any; // todo this is a function
-  dispatchItem?: any; // todo this is a function
+  item: ItemType;
+  // todo these need function types
+  toggleItemStatus?: any;
+  dispatchItem?: any;
+  completeItem?: any;
+  complainItem?: any;
   readOnly?: boolean;
   sellerId?: number;
   buyerId?: number; // optional as won't include an id until it is bought
 }
 
-const Item = ({ item, toggleItemStatus, dispatchItem, readOnly = false, sellerId, buyerId }: ItemProps) => {
+const Item = ({ item, toggleItemStatus, dispatchItem, complainItem, completeItem, readOnly = false, sellerId, buyerId }: ItemProps) => {
 
   // used for escrow
   if (readOnly) {
@@ -33,6 +37,8 @@ const Item = ({ item, toggleItemStatus, dispatchItem, readOnly = false, sellerId
         <td>
           {(buyerId && item && !item.sold) ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Order</button> : '' }
           {(buyerId && item.buyerId === buyerId && item.dispatched !== true) ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Cancel</button> : ''}
+          {(buyerId && item.buyerId === buyerId && item.dispatched === true && (item.complete !== true || item.complained !== true) ) ? <button onClick={() => completeItem(item.id)} className="buy-sell-button">Complete</button> : ''}
+          {(buyerId && item.buyerId === buyerId && item.dispatched === true && (item.complete !== true || item.complained !== true) ) ? <button onClick={() => complainItem(item.id)} className="buy-sell-button">Complain</button> : ''}
         </td>
         <td
           className={cx(
@@ -64,5 +70,5 @@ const Item = ({ item, toggleItemStatus, dispatchItem, readOnly = false, sellerId
 
 export default connect(
   null,
-  { toggleItemStatus, dispatchItem }
+  { toggleItemStatus, dispatchItem, completeItem, complainItem }
 )(Item);

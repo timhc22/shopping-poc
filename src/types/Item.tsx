@@ -6,4 +6,6 @@ export type Item = {
   buyerId?: number;
   sold: boolean;
   dispatched: boolean;
+  complete: boolean;
+  complained: boolean;
 }

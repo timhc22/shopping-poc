@@ -20,6 +20,10 @@ export const getItems = (store: any) =>
 export const getItemsByItemListStateFilter = (store: any, statusFilter: any) => {
   const allItems = getItems(store);
   switch(statusFilter) {
+    case ITEM_STATE_FILTERS.COMPLETE:
+      return allItems.filter((item: any) => item.complete);
+    case ITEM_STATE_FILTERS.COMPLAINED:
+      return allItems.filter((item: any) => item.complained);
     case ITEM_STATE_FILTERS.DISPATCHED:
       return allItems.filter((item: any) => item.dispatched);
     case ITEM_STATE_FILTERS.SOLD:

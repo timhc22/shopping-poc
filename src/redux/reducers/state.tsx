@@ -1,15 +1,15 @@
-import { LIST_ITEM, TOGGLE_ITEM_STATUS, CREDIT_ACCOUNT, DEBIT_ACCOUNT, DISPATCH_ITEM } from '../actionTypes';
+import { LIST_ITEM, TOGGLE_ITEM_STATUS, CREDIT_ACCOUNT, DEBIT_ACCOUNT, DISPATCH_ITEM, COMPLETE_ITEM, COMPLAIN_ITEM } from '../actionTypes';
 
 // everything in one state for now
 const initialState = {
   allIds: [1,2,3,4,5,6],
   byIds: {
-    1: { content: 'Coffee', sellerId: 1, sold: false, dispatched: false, price: 3, buyerId: null },
-    2: { content: 'T-Shirt', sellerId: 2, sold: false, dispatched: false, price: 5, buyerId: null },
-    3: { content: 'Tea', sellerId: 1, sold: false, dispatched: false, price: 2.5, buyerId: null },
-    4: { content: 'Cake', sellerId: 1, sold: false, dispatched: false, price: 3.5, buyerId: null },
-    5: { content: 'Shorts', sellerId: 2, sold: false, dispatched: false, price: 8, buyerId: null },
-    6: { content: 'Hoody', sellerId: 2, sold: false, dispatched: false, price: 12, buyerId: null },
+    1: { content: 'Coffee', sellerId: 1, sold: false, dispatched: false, complete: false, complained: false, price: 3, buyerId: null },
+    2: { content: 'T-Shirt', sellerId: 2, sold: false, dispatched: false, complete: false, complained: false, price: 5, buyerId: null },
+    3: { content: 'Tea', sellerId: 1, sold: false, dispatched: false, complete: false, complained: false, price: 2.5, buyerId: null },
+    4: { content: 'Cake', sellerId: 1, sold: false, dispatched: false, complete: false, complained: false, price: 3.5, buyerId: null },
+    5: { content: 'Shorts', sellerId: 2, sold: false, dispatched: false, complete: false, complained: false, price: 8, buyerId: null },
+    6: { content: 'Hoody', sellerId: 2, sold: false, dispatched: false, complete: false, complained: false, price: 12, buyerId: null },
   },
   // todo probably better to combine timestamp and Id, but we could build sellers and buyers to inherit an underlying user so ids were unique to users
   allTimestamps: [1614325077531,1614325077533,1614325077539,1614325077535,1614325077537,1614325077540],
@@ -42,6 +42,8 @@ export default function(state: any = initialState, action: any) {
             sellerId,
             sold: false,
             dispatched: false,
+            complete: false,
+            complained: false,
             price,
             buyerId: null
           }
@@ -81,7 +83,7 @@ export default function(state: any = initialState, action: any) {
       item = state.byIds[id];
 
       console.log('is dispatched');
-      newState = addTransaction(state, 'seller', item.sellerId, item.price, 'credit');
+      // newState = addTransaction(state, 'seller', item.sellerId, item.price, 'credit');
 
       newState = {
         ...newState,
@@ -91,6 +93,48 @@ export default function(state: any = initialState, action: any) {
           [id]: {
             ...state.byIds[id],
             dispatched: true,
+          }
+        }
+      }
+      return newState;
+    }
+    case COMPLETE_ITEM: {
+      const { id } = action.payload;
+      newState = {};
+      item = state.byIds[id];
+
+      console.log('is complete');
+      newState = addTransaction(state, 'seller', item.sellerId, item.price, 'credit');
+
+      newState = {
+        ...newState,
+        // can use state here as have only changed the transactions states above
+        byIds: {
+          ...state.byIds,
+          [id]: {
+            ...state.byIds[id],
+            complete: true,
+          }
+        }
+      }
+      return newState;
+    }
+    case COMPLAIN_ITEM: {
+      const { id } = action.payload;
+      newState = {};
+      item = state.byIds[id];
+
+      console.log('is complained');
+      newState = addTransaction(state, 'buyer', item.buyerId, item.price, 'credit');
+
+      newState = {
+        ...newState,
+        // can use state here as have only changed the transactions states above
+        byIds: {
+          ...state.byIds,
+          [id]: {
+            ...state.byIds[id],
+            complained: true
           }
         }
       }

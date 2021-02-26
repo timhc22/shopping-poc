@@ -2,9 +2,11 @@ import {
   LIST_ITEM,
   SET_ITEM_STATE_FILTER,
   TOGGLE_ITEM_STATUS,
-  DISPATCH_ITEM,
   CREDIT_ACCOUNT,
-  DEBIT_ACCOUNT
+  DEBIT_ACCOUNT,
+  DISPATCH_ITEM,
+  COMPLETE_ITEM,
+  COMPLAIN_ITEM
 } from './actionTypes';
 
 /**
@@ -27,6 +29,16 @@ export const toggleItemStatus = (id: number, buyerId: number) => ({
 
 export const dispatchItem = (id: number) => ({
   type: DISPATCH_ITEM,
+  payload: { id }
+});
+
+export const completeItem = (id: number) => ({
+  type: COMPLETE_ITEM,
+  payload: { id }
+});
+
+export const complainItem = (id: number) => ({
+  type: COMPLAIN_ITEM,
   payload: { id }
 });
 
