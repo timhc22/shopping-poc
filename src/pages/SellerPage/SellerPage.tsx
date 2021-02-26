@@ -16,16 +16,16 @@ export default function SellerPage(props: any): JSX.Element {
       </Link>
 
       <h1>Seller {sellerId}</h1>
-      <UserBalance type="buyer" id={sellerId}/>
+      {/*<UserBalance type="seller" id={sellerId}/>*/}
       <br/>
       <ListItem sellerId={sellerId} />
       <br/>
       <ItemStateFilters />
-      <ForSaleList readOnly={true} sellerId={sellerId} />
+      <ForSaleList sellerId={sellerId} />
 
       <br/>
       <h3>Seller {sellerId} Transactions:</h3>
-      <TransactionsList type="seller" id={sellerId}/>
+      {/*<TransactionsList type="seller" id={sellerId}/>*/}
     </div>
   );
 }

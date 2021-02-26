@@ -4,4 +4,6 @@ export type Item = {
   price: number;
   sellerId: number;
   buyerId?: number;
+  sold: boolean;
+  dispatched: boolean;
 }

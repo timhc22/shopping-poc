@@ -1,15 +1,15 @@
-import { LIST_ITEM, TOGGLE_ITEM_STATUS, CREDIT_ACCOUNT, DEBIT_ACCOUNT } from '../actionTypes';
+import { LIST_ITEM, TOGGLE_ITEM_STATUS, CREDIT_ACCOUNT, DEBIT_ACCOUNT, DISPATCH_ITEM } from '../actionTypes';
 
 // everything in one state for now
 const initialState = {
   allIds: [1,2,3,4,5,6],
   byIds: {
-    1: { content: 'Coffee', sellerId: 1, sold: false, price: 3, buyerId: null },
-    2: { content: 'T-Shirt', sellerId: 2, sold: false, price: 5, buyerId: null },
-    3: { content: 'Tea', sellerId: 1, sold: false, price: 2.5, buyerId: null },
-    4: { content: 'Cake', sellerId: 1, sold: false, price: 3.5, buyerId: null },
-    5: { content: 'Shorts', sellerId: 2, sold: false, price: 8, buyerId: null },
-    6: { content: 'Hoody', sellerId: 2, sold: false, price: 12, buyerId: null },
+    1: { content: 'Coffee', sellerId: 1, sold: false, dispatched: false, price: 3, buyerId: null },
+    2: { content: 'T-Shirt', sellerId: 2, sold: false, dispatched: false, price: 5, buyerId: null },
+    3: { content: 'Tea', sellerId: 1, sold: false, dispatched: false, price: 2.5, buyerId: null },
+    4: { content: 'Cake', sellerId: 1, sold: false, dispatched: false, price: 3.5, buyerId: null },
+    5: { content: 'Shorts', sellerId: 2, sold: false, dispatched: false, price: 8, buyerId: null },
+    6: { content: 'Hoody', sellerId: 2, sold: false, dispatched: false, price: 12, buyerId: null },
   },
   // todo probably better to combine timestamp and Id, but we could build sellers and buyers to inherit an underlying user so ids were unique to users
   allTimestamps: [1614325077531,1614325077533,1614325077539,1614325077535,1614325077537,1614325077540],
@@ -24,6 +24,7 @@ const initialState = {
 }
 
 export default function(state: any = initialState, action: any) {
+  let newState = {}; let item;
   switch (action.type) {
     case LIST_ITEM: {
       const { content, sellerId, price } = action.payload;
@@ -40,6 +41,7 @@ export default function(state: any = initialState, action: any) {
             content,
             sellerId,
             sold: false,
+            dispatched: false,
             price,
             buyerId: null
           }
@@ -48,8 +50,8 @@ export default function(state: any = initialState, action: any) {
     }
     case TOGGLE_ITEM_STATUS: {
       const { id, buyerId } = action.payload;
-      let newState = {};
-      let item = state.byIds[id];
+      newState = {};
+      item = state.byIds[id];
 
       if (item.sold) {
         console.log('is cancelled');
@@ -68,6 +70,29 @@ export default function(state: any = initialState, action: any) {
             ...state.byIds[id],
             sold: !state.byIds[id].sold,
             buyerId: state.byIds[id].sold ? null : buyerId
+          }
+        }
+      }
+      return newState;
+    }
+    case DISPATCH_ITEM: {
+      const { id } = action.payload;
+      newState = {};
+      item = state.byIds[id];
+
+      if (item.dispatched) {
+        console.log('is dispatched');
+        newState = addTransaction(state, 'seller', item.sellerId, item.price, 'credit');
+      }
+
+      newState = {
+        ...newState,
+        // can use state here as have only changed the transactions states above
+        byIds: {
+          ...state.byIds,
+          [id]: {
+            ...state.byIds[id],
+            dispatched: true,
           }
         }
       }

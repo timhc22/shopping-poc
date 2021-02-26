@@ -3,7 +3,8 @@ type itemStateFilters = {
 }
 
 export const ITEM_STATE_FILTERS: itemStateFilters = {
-  ALL: 'all',
   FOR_SALE: 'for sale',
-  SOLD: 'sold'
+  SOLD: 'sold',
+  DISPATCHED: 'dispatched',
+  ALL: 'all'
 };

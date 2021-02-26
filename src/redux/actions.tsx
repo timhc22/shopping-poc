@@ -2,6 +2,7 @@ import {
   LIST_ITEM,
   SET_ITEM_STATE_FILTER,
   TOGGLE_ITEM_STATUS,
+  DISPATCH_ITEM,
   CREDIT_ACCOUNT,
   DEBIT_ACCOUNT
 } from './actionTypes';
@@ -22,6 +23,11 @@ export const listItem = (sellerId: number, content: any, price: number) => ({
 export const toggleItemStatus = (id: number, buyerId: number) => ({
   type: TOGGLE_ITEM_STATUS,
   payload: { id, buyerId }
+});
+
+export const dispatchItem = (id: number) => ({
+  type: DISPATCH_ITEM,
+  payload: { id }
 });
 
 export const setItemStateFilter = (itemStateFilter: any) => ({
