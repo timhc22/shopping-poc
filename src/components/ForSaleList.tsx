@@ -19,13 +19,13 @@ const ForSaleList = ({ items, readOnly = false, buyerId, sellerId }: ForSaleList
   }
 
   return (
-    <ul className="item-list">
+    <table className="item-list table-style">
       {items && items.length
         ? items.map((item: any, index: number) => {
           return <Item key={`item-${item.id}`} item={item} readOnly={readOnly} sellerId={sellerId} buyerId={buyerId} />;
         })
         : 'Empty' }
-    </ul>
+    </table>
   )
 };
 

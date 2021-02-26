@@ -15,41 +15,34 @@ const Item = ({ item, toggleItemStatus, readOnly = false, sellerId, buyerId }: I
 
   if (readOnly) {
     return (
-      <li className="item">
-        <span>Item: {item.content},</span>
-        <span>&nbsp;</span>
-        <span>Price: {item.price}$BSN,</span>
-        <span>&nbsp;</span>
-        <span>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'},</span>
-        <span>&nbsp;</span>
-        <span>{item.buyerId ? `Buyer: ${item.buyerId}` : 'Buyer: no buyer'}</span>
-      </li>
+      <tr className="item">
+        <td>Item: {item.content}</td>
+        <td>Price: {item.price}$BSN</td>
+        <td>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'}</td>
+        <td>{item.buyerId ? `Buyer: ${item.buyerId}` : 'Buyer: no buyer'}</td>
+      </tr>
     )
   } else {
     return (
-      <li className="item" onClick={() => toggleItemStatus(item.id, buyerId)}>
-        {item && item.sold ? item.buyerId === buyerId ? <button className="buy-sell-button">Cancel</button> : '' : <button className="buy-sell-button">Order</button>}
-        <span>&nbsp;</span>
-        <span
+      <tr className="item" onClick={() => toggleItemStatus(item.id, buyerId)}>
+        <td>{item && item.sold ? item.buyerId === buyerId ? <button className="buy-sell-button">Cancel</button> : '' : <button className="buy-sell-button">Order</button>}</td>
+        <td
           className={cx(
             'item__text',
             item && item.sold && 'item__text--sold'
           )}
         >
-        Item: {item.content},
-        </span>
-        <span>&nbsp;</span>
-        <span className={cx(
+        Item: {item.content}
+        </td>
+        <td className={cx(
           'item__text',
           item && item.sold && 'item__text--sold'
-        )}>Price: {item.price}$BSN,</span>
-        <span>&nbsp;</span>
-        <span>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'},</span>
-        <span>&nbsp;</span>
-        <span>
+        )}>Price: {item.price}$BSN</td>
+        <td>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'}</td>
+        <td>
           {item.buyerId ? `Buyer: ${item.buyerId}` : 'Buyer: no buyer'}
-        </span>
-      </li>
+        </td>
+      </tr>
     )
   }
 };

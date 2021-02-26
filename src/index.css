@@ -44,3 +44,10 @@ code {
 .buy-sell-button {
   cursor: pointer;
 }
+
+.transactions {
+}
+
+.table-style tr td {
+  padding: 10px;
+}

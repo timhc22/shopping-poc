@@ -33,6 +33,11 @@ export default function DashboardPage(): JSX.Element {
           <Link to="/escrow" className="button">
             Escrow
           </Link>
+
+          <h2>Transactions</h2>
+          <Link to="/transactions" className="button">
+            Transactions
+          </Link>
         </section>
       </div>
     </section>

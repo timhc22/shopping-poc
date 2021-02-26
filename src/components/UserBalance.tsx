@@ -4,8 +4,8 @@ import { Transaction as TransactionType } from "../types/Transaction";
 
 type UserBalanceProps = {
   transactions: TransactionType[],
-  type: string,
-  id: number
+  type?: string,
+  id?: number | string
 }
 
 const UserBalance = ({ transactions, type, id }: UserBalanceProps ) => {
@@ -13,6 +13,23 @@ const UserBalance = ({ transactions, type, id }: UserBalanceProps ) => {
   console.log(transactions);
   console.log(id);
   console.log(type);
+
+  if (type == '' && id == '') {
+    return (
+      <table className="transactions table-style">
+        { transactions.map(t => (
+        <tr key={t.timestamp}>
+          <td>Timestamp: {t.timestamp}&emsp;</td>
+          <td>Id: {t.type}&nbsp;</td>
+          <td>{t.id}&emsp;</td>
+          <td>Transaction: {t.transactionType}&nbsp;</td>
+          <td>{t.amount}&emsp;</td>
+          <br/>
+        </tr>
+        ))}
+      </table>
+    )
+  }
 
   let userTotal = 0;
 
