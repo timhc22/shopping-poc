@@ -39,7 +39,6 @@ const TransactionsList = ({ transactions, type, id }: TransactionsProps ) => {
   }).filter(e=>e);
 
   if (userTransactions.length !== 0) {
-    console.log(userTransactions);
 
     return (
       <table className="transactions table-style">
