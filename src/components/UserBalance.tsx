@@ -13,7 +13,7 @@ const UserBalance = ({ transactions, type, id }: UserBalanceProps ) => {
     return (
       <table className="transactions table-style">
         <tbody>
-        { transactions.map(t => (
+        { transactions.slice(0).reverse().map(t => (
         <tr key={t.timestamp}>
           <td>Timestamp: {t.timestamp}&emsp;</td>
           <td>Id: {t.type}&nbsp;</td>

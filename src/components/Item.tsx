@@ -24,8 +24,8 @@ const Item = ({ item, toggleItemStatus, readOnly = false, sellerId, buyerId }: I
     )
   } else {
     return (
-      <tr className="item" onClick={() => toggleItemStatus(item.id, buyerId)}>
-        <td>{item && item.sold ? item.buyerId === buyerId ? <button className="buy-sell-button">Cancel</button> : '' : <button className="buy-sell-button">Order</button>}</td>
+      <tr className="item">
+        <td>{item && item.sold ? item.buyerId === buyerId ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Cancel</button> : '' : <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Order</button>}</td>
         <td
           className={cx(
             'item__text',
