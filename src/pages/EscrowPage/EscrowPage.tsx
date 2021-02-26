@@ -7,10 +7,6 @@ export default function EscrowPage(): JSX.Element {
 
   return (
     <div>
-      <Link to="/">
-        &larr; Back
-      </Link>
-
       <h1>Escrow</h1>
       <ItemStateFilters />
       <ForSaleList readOnly={true} />

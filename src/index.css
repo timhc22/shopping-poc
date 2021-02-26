@@ -62,3 +62,8 @@ code {
 .MuiButton-root {
   margin: 5px;
 }
+
+.logo {
+  color: white;
+  text-decoration: none;
+}

@@ -9,15 +9,15 @@ type ListItemProps = {
 }
 
 type ListItemState = {
-  input?: string | null;
+  input?: string | undefined;
   sellerId: number;
-  price: number | null;
+  price: number | undefined;
 }
 
 class ListItem extends React.Component<ListItemProps, ListItemState> {
   constructor(props: any) {
     super(props);
-    this.state = { input: "", price: null, sellerId: props.sellerId };
+    this.state = { input: "", price: undefined, sellerId: props.sellerId };
   }
 
   updateInput = (input: any) => {
@@ -30,7 +30,7 @@ class ListItem extends React.Component<ListItemProps, ListItemState> {
 
   handleListItem = () => {
     this.props.listItem(this.state.sellerId, this.state.input, this.state.price);
-    this.setState({ ...this.state,  input: null, price: null });
+    this.setState({ ...this.state,  input: undefined, price: undefined });
   };
 
   render() {

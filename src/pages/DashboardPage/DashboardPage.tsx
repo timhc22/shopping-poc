@@ -6,7 +6,6 @@ export default function DashboardPage(): JSX.Element {
 
   return (
     <section className="container">
-      <h1>Boson Protocol</h1>
       <div>
         <section className="container">
           <h2>Buyers</h2>

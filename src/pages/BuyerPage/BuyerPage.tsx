@@ -11,10 +11,6 @@ export default function BuyerPage(props: any): JSX.Element {
 
   return (
     <div>
-      <Link to="/">
-        &larr; Back
-      </Link>
-
       <h1>Buyer {buyerId}</h1>
       <UserBalance type="buyer" id={buyerId}/>
 

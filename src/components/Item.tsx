@@ -25,6 +25,7 @@ const Item = ({ item, toggleItemStatus, dispatchItem, complainItem, completeItem
   if (readOnly) {
     return (
       <TableRow className="item">
+        <TableCell></TableCell>
         <TableCell>{item.content}</TableCell>
         <TableCell>{item.price}$BSN</TableCell>
         <TableCell>

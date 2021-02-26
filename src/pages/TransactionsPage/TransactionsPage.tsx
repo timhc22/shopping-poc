@@ -6,10 +6,6 @@ export default function TransactionsPage(): JSX.Element {
 
   return (
     <div>
-      <Link to="/">
-        &larr; Back
-      </Link>
-
       <h1>Transactions</h1>
       <TransactionsList type="" id="" />
     </div>
