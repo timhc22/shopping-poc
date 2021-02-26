@@ -53,10 +53,10 @@ export default function(state: any = initialState, action: any) {
 
       if (item.sold) {
         console.log('is cancelled');
-        newState = addTransaction(state, 'buyer', id, item.price*-1, 'debit');
+        newState = addTransaction(state, 'buyer', id, item.price, 'credit');
       } else if (!item.sold) {
         console.log('is ordered');
-        newState = addTransaction(state, 'buyer', id, item.price, 'credit');
+        newState = addTransaction(state, 'buyer', id, item.price*-1, 'debit');
       }
 
       newState = {
