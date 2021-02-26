@@ -20,6 +20,9 @@ const Item = ({ item, toggleItemStatus, readOnly = false, sellerId, buyerId }: I
         <td>Price: {item.price}$BSN</td>
         <td>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'}</td>
         <td>{item.buyerId ? `Buyer: ${item.buyerId}` : 'Buyer: no buyer'}</td>
+        <td>
+          {item.sold ? `Status: sold` : 'Status: unsold'}
+        </td>
       </tr>
     )
   } else {
@@ -41,6 +44,9 @@ const Item = ({ item, toggleItemStatus, readOnly = false, sellerId, buyerId }: I
         <td>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'}</td>
         <td>
           {item.buyerId ? `Buyer: ${item.buyerId}` : 'Buyer: no buyer'}
+        </td>
+        <td>
+          {item.sold ? `Status: sold` : 'Status: unsold'}
         </td>
       </tr>
     )
