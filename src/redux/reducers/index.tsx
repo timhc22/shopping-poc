@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import itemStateFilter from './itemStateFilter';
-import items from './items';
-import transactions from './transactions';
+import items from './state';
 
-export default combineReducers({ items, itemStateFilter, transactions });
+export default combineReducers({ items, itemStateFilter });

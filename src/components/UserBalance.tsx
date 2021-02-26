@@ -17,6 +17,7 @@ const UserBalance = ({ transactions, type, id }: UserBalanceProps ) => {
   if (type == '' && id == '') {
     return (
       <table className="transactions table-style">
+        <tbody>
         { transactions.map(t => (
         <tr key={t.timestamp}>
           <td>Timestamp: {t.timestamp}&emsp;</td>
@@ -27,6 +28,7 @@ const UserBalance = ({ transactions, type, id }: UserBalanceProps ) => {
           <br/>
         </tr>
         ))}
+        </tbody>
       </table>
     )
   }
@@ -50,9 +52,7 @@ const UserBalance = ({ transactions, type, id }: UserBalanceProps ) => {
 };
 
 const mapStateToProps = (state: any) => {
-  // todo add more checks
-  const transactions = state.transactions.transactions;
-
+  const transactions = state.items.transactions;
   return { transactions };
 }
 
