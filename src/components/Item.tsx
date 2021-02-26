@@ -28,7 +28,7 @@ const Item = ({ item, toggleItemStatus, readOnly = false, sellerId, buyerId }: I
   } else {
     return (
       <li className="item" onClick={() => toggleItemStatus(item.id, buyerId)}>
-        {item && item.sold ? item.buyerId === buyerId ? <button className="buy-sell-button">Sell</button> : '' : <button className="buy-sell-button">Order</button>}
+        {item && item.sold ? item.buyerId === buyerId ? <button className="buy-sell-button">Cancel</button> : '' : <button className="buy-sell-button">Order</button>}
         <span>&nbsp;</span>
         <span
           className={cx(
