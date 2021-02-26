@@ -5,7 +5,6 @@ import {
   CREDIT_ACCOUNT,
   DEBIT_ACCOUNT
 } from './actionTypes';
-import { Item as ItemType } from "../types/Item";
 
 /**
  * Items
@@ -23,9 +22,9 @@ export const listItem = (sellerId: number, content: any, price: number) => ({
   }
 });
 
-export const toggleItemStatus = (id: number, buyerId: number, item: ItemType) => ({
+export const toggleItemStatus = (id: number, buyerId: number) => ({
   type: TOGGLE_ITEM_STATUS,
-  payload: { id, buyerId, item }
+  payload: { id, buyerId }
 });
 
 export const setItemStateFilter = (itemStateFilter: any) => ({

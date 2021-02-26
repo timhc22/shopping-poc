@@ -38,9 +38,6 @@ const UserBalance = ({ transactions, type, id }: UserBalanceProps ) => {
     }
   }).filter(e=>e);
 
-
-  console.log(userTransactions);
-
   return (
     <div>Balance: {userTotal}$BSN</div>
   )

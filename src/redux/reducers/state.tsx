@@ -24,8 +24,6 @@ const initialState = {
 }
 
 export default function(state: any = initialState, action: any) {
-  const now = Date.now();
-
   switch (action.type) {
     case LIST_ITEM: {
       const { id, content, sellerId, price } = action.payload;
@@ -45,9 +43,20 @@ export default function(state: any = initialState, action: any) {
       };
     }
     case TOGGLE_ITEM_STATUS: {
-      const { id, buyerId, item } = action.payload;
+      const { id, buyerId } = action.payload;
+      let newState = {};
+      let item = state.byIds[id];
+      console.log(item);
 
-      let newState = {
+      if (item.sold) {
+        console.log('is cancelled');
+        newState = addTransaction(state, item.type, id, item.amount*-1, 'debit');
+      } else if (!item.sold) {
+        console.log('is ordered');
+        newState = addTransaction(state, item.type, id, item.amount, 'credit');
+      }
+
+      newState = {
         ...state,
         byIds: {
           ...state.byIds,
@@ -59,50 +68,44 @@ export default function(state: any = initialState, action: any) {
         }
       }
 
-      if (state.byIds[id].sold) {
-        console.log('is cancelled')
-      } else {
-        console.log('is ordered')
-      }
-
-
       return newState;
     }
     case CREDIT_ACCOUNT: {
       const { type, id, amount } = action.payload;
-      return {
-        ...state,
-        allTimestamps: [...state.allTimestamps, now],
-        transactions: [
-          ...state.transactions,
-          {
-            timestamp: now,
-            transactionType: 'credit',
-            type: type,
-            id: id,
-            amount: amount,
-          }
-        ]
-      }
+      return addTransaction(state, type, id, amount, 'credit');
     }
     case DEBIT_ACCOUNT: {
       const { type, id, amount } = action.payload;
-      return {
-        ...state,
-        allTimestamps: [...state.allTimestamps, now],
-        transactions: [
-          ...state.transactions,
-          {
-            timestamp: now,
-            transactionType: 'debit',
-            type: type,
-            id: id,
-            amount: amount * -1, // convert to -
-          }
-        ]
-      }
+      return addTransaction(state, type, id, amount*-1, 'debit');
     }
     default:
       return state;
+  }
+}
+
+/**
+ * Add transaction
+ *
+ * @param state
+ * @param type
+ * @param id
+ * @param amount
+ * @param transactionType
+ */
+function addTransaction(state: any, type: string, id: number, amount: number, transactionType: string) {
+  const now = Date.now();
+  return {
+    ...state,
+      allTimestamps: [...state.allTimestamps, now],
+      transactions: [
+      ...state.transactions,
+      {
+        timestamp: now,
+        transactionType: transactionType,
+        type: type,
+        id: id,
+        amount: amount,
+      }
+    ]
   }
 }
