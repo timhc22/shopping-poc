@@ -52,7 +52,7 @@ const TransactionsList = ({ transactions, type, id }: TransactionsProps ) => {
             <td>Id: {tr.type}&nbsp;</td>
             <td>{tr.id}&emsp;</td>
             <td>Transaction: {tr.transactionType}&nbsp;</td>
-            <td>{tr.amount}&emsp;</td>
+            <td>{tr.amount}$BSN&emsp;</td>
           </tr>
         ))}
         </tbody>
