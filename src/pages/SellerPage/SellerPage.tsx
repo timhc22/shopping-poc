@@ -24,7 +24,7 @@ export default function SellerPage(props: any): JSX.Element {
       <ForSaleList readOnly={true} sellerId={sellerId} />
 
       <br/>
-      <h3>Buyer {sellerId} Transactions:</h3>
+      <h3>Seller {sellerId} Transactions:</h3>
       <TransactionsList type="seller" id={sellerId}/>
     </div>
   );
