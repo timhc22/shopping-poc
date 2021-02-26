@@ -38,10 +38,9 @@ export const getTransactionsState = (store: any) => store.transactions;
 export const getTransactions = (store: any) =>
   getTransactionsState(store) ? getTransactionsState(store).allTimestamps : [];
 
-export const getUserBalance = (store: any, type: string, id: number) => {
-  console.log('here');
-  console.log(store);
-  getTransactions(store) // todo return specifics
-}
-
-
+// export const getUserBalance = (store: any, type: string, id: number) => {
+//   console.log('here');
+//   console.log(store);
+//   getTransactions(store) // todo return specifics
+// }
+//

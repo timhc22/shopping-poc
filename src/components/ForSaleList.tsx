@@ -13,7 +13,7 @@ type ForSaleListProps = {
 
 const ForSaleList = ({ items, readOnly = false, buyerId, sellerId }: ForSaleListProps ) => {
 
-  // when listing the seller's own for sale items
+  // when listing the seller's own selling items
   if (items && sellerId) {
     items = items.filter((item: ItemType) => sellerId === item.sellerId);
   }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ListItem from "../../components/ListItem";
 import ForSaleList from "../../components/ForSaleList";
 import ItemStateFilters from "../../components/ItemStateFilters";
+import UserBalance from "../../components/UserBalance";
 
 export default function SellerPage(props: any): JSX.Element {
   const sellerId = parseInt(props.match.params.id);
@@ -14,6 +15,8 @@ export default function SellerPage(props: any): JSX.Element {
       </Link>
 
       <h1>Seller {sellerId}</h1>
+      <UserBalance type="buyer" id={sellerId}/>
+      <br/>
       <ListItem sellerId={sellerId} />
       <br/>
       <ItemStateFilters />
