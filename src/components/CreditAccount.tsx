@@ -10,7 +10,7 @@ type CreditAccountProps = {
 }
 
 type CreditAccountState = {
-  amount: number;
+  amount: string;
   id: number;
   type?: string;
 }
@@ -18,7 +18,7 @@ type CreditAccountState = {
 class CreditAccount extends React.Component<CreditAccountProps, CreditAccountState> {
   constructor(props: any) {
     super(props);
-    this.state = { type: props.type, amount: 0, id: props.id };
+    this.state = { type: props.type, amount: "", id: props.id };
   }
 
   addFunds = (input: any) => {
@@ -26,8 +26,8 @@ class CreditAccount extends React.Component<CreditAccountProps, CreditAccountSta
   }
 
   handleCreditAccount = () => {
-    this.props.creditAccount(this.state.type, this.state.id, this.state.amount);
-    this.setState({ ...this.state, amount: 0 });
+    this.props.creditAccount(this.state.type, this.state.id, parseFloat(this.state.amount));
+    this.setState({ ...this.state, amount: "" });
   };
 
   render() {

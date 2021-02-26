@@ -40,7 +40,8 @@ export default function(state: any = initialState, action: any) {
     case LIST_ITEM: {
       const { content, sellerId, price } = action.payload;
 
-      let id = Math.max.apply(Math, state.allIds);
+      let id;
+      if(state.allIds.length == 0) { id = 1 } else { id = Math.max.apply(Math, state.allIds) };
       id = ++id;
 
       return {
