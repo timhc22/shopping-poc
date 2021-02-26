@@ -39,7 +39,10 @@ const Item = ({ item, toggleItemStatus, dispatchItem, complainItem, completeItem
           </Link>
         </TableCell>
         <TableCell>
-          {item.sold ? `Status: sold ` : 'Status: unsold'} { (item.sold && item.buyerId === buyerId) || (item.sold && item.sellerId === sellerId) ? `| Dispatched: ${item.dispatched}` : ''}
+          {!item.ordered ? 'not sold' : ''}
+          {item.ordered && (!item.complete && !item.complained) ? `ordered (${item.price}$BSN in escrow)` : ''} { (item.ordered && item.buyerId === buyerId) || (item.ordered && item.sellerId === sellerId) ? `| Dispatched: ${item.dispatched}` : ''}
+          {item.complete ? `complete (+${item.price}$BSN to Seller ${item.sellerId})`: ''}
+          {item.complained ? `complained (+${item.price}$BSN to Buyer ${item.buyerId})` : ''}
         </TableCell>
       </TableRow>
     )
@@ -47,7 +50,7 @@ const Item = ({ item, toggleItemStatus, dispatchItem, complainItem, completeItem
     return (
       <TableRow className="item">
         <TableCell>
-          {(buyerId && item && !item.sold) ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Order</button> : '' }
+          {(buyerId && item && !item.ordered) ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Order</button> : '' }
           {item.buyerId === buyerId && !item.dispatched ? <button onClick={() => toggleItemStatus(item.id, buyerId)} className="buy-sell-button">Cancel</button> : ''}
           {item.buyerId === buyerId && item.dispatched && (!item.complete && !item.complained) ? <button onClick={() => completeItem(item.id)} className="buy-sell-button">Complete</button> : ''}
           {item.buyerId === buyerId && item.dispatched && (!item.complete && !item.complained) ? <button onClick={() => complainItem(item.id)} className="buy-sell-button">Complain</button> : ''}
@@ -55,14 +58,14 @@ const Item = ({ item, toggleItemStatus, dispatchItem, complainItem, completeItem
         <TableCell
           className={cx(
             'item__text',
-            item && item.sold && 'item__text--sold'
+            item && item.ordered && 'item__text--sold'
           )}
         >
         {item.content}
         </TableCell>
         <TableCell className={cx(
           'item__text',
-          item && item.sold && 'item__text--sold'
+          item && item.ordered && 'item__text--sold'
         )}>{item.price}$BSN</TableCell>
         <TableCell>
           <Link to={`/seller/${item.sellerId}`} className="button">
@@ -75,14 +78,14 @@ const Item = ({ item, toggleItemStatus, dispatchItem, complainItem, completeItem
           </Link>
         </TableCell>
         <TableCell>
-          { !item.sold ? `unsold` : ''}
-          { item.sold && !item.dispatched ? `sold | awaiting dispatch...` : ''}
+          { !item.ordered ? `unsold` : ''}
+          { item.ordered && !item.dispatched ? `ordered | awaiting dispatch...` : ''}
           { item.dispatched ? 'Dispatched! | awaiting completion...' : ''}
 
           { (item.complete) ? 'Complete!' : ''}
           { (item.complained) ? 'Complained!' : ''}
 
-          { (!item.dispatched && item.sold && item.sellerId === sellerId) ? <button onClick={() => dispatchItem(item.id)} className="buy-sell-button">Dispatch</button> : ''}
+          { (!item.dispatched && item.ordered && item.sellerId === sellerId) ? <button onClick={() => dispatchItem(item.id)} className="buy-sell-button">Dispatch</button> : ''}
         </TableCell>
       </TableRow>
     )

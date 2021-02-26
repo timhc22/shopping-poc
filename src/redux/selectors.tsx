@@ -26,14 +26,14 @@ export const getItemsByItemListStateFilter = (store: any, statusFilter: any) => 
       return allItems.filter((item: any) => item.complained);
     case ITEM_STATE_FILTERS.DISPATCHED:
       return allItems.filter((item: any) => item.dispatched);
-    case ITEM_STATE_FILTERS.SOLD:
-      return allItems.filter((item: any) => item.sold);
+    case ITEM_STATE_FILTERS.ORDERED:
+      return allItems.filter((item: any) => item.ordered);
     case ITEM_STATE_FILTERS.FOR_SALE:
-      return allItems.filter((item: any) => !item.sold);
+      return allItems.filter((item: any) => !item.ordered);
     case ITEM_STATE_FILTERS.ALL:
       return allItems;
     default:
-      return allItems.filter((item: any) => !item.sold);
+      return allItems.filter((item: any) => !item.ordered);
   }
 }
 

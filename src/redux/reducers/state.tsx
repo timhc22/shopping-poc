@@ -15,12 +15,12 @@ const initialState = {
 // const initialState = {
 //   allIds: [1,2,3,4,5,6],
 //   byIds: {
-//     1: { content: 'Coffee', sellerId: 1, sold: false, dispatched: false, complete: false, complained: false, price: 3, buyerId: null },
-//     2: { content: 'T-Shirt', sellerId: 2, sold: false, dispatched: false, complete: false, complained: false, price: 5, buyerId: null },
-//     3: { content: 'Tea', sellerId: 1, sold: false, dispatched: false, complete: false, complained: false, price: 2.5, buyerId: null },
-//     4: { content: 'Cake', sellerId: 1, sold: false, dispatched: false, complete: false, complained: false, price: 3.5, buyerId: null },
-//     5: { content: 'Shorts', sellerId: 2, sold: false, dispatched: false, complete: false, complained: false, price: 8, buyerId: null },
-//     6: { content: 'Hoody', sellerId: 2, sold: false, dispatched: false, complete: false, complained: false, price: 12, buyerId: null },
+//     1: { content: 'Coffee', sellerId: 1, ordered: false, dispatched: false, complete: false, complained: false, price: 3, buyerId: null },
+//     2: { content: 'T-Shirt', sellerId: 2, ordered: false, dispatched: false, complete: false, complained: false, price: 5, buyerId: null },
+//     3: { content: 'Tea', sellerId: 1, ordered: false, dispatched: false, complete: false, complained: false, price: 2.5, buyerId: null },
+//     4: { content: 'Cake', sellerId: 1, ordered: false, dispatched: false, complete: false, complained: false, price: 3.5, buyerId: null },
+//     5: { content: 'Shorts', sellerId: 2, ordered: false, dispatched: false, complete: false, complained: false, price: 8, buyerId: null },
+//     6: { content: 'Hoody', sellerId: 2, ordered: false, dispatched: false, complete: false, complained: false, price: 12, buyerId: null },
 //   },
 //   // todo probably better to combine timestamp and Id, but we could build sellers and buyers to inherit an underlying user so ids were unique to users
 //   allTimestamps: [1614325077531,1614325077533,1614325077539,1614325077535,1614325077537,1614325077540],
@@ -52,7 +52,7 @@ export default function(state: any = initialState, action: any) {
           [id]: {
             content,
             sellerId,
-            sold: false,
+            ordered: false,
             dispatched: false,
             complete: false,
             complained: false,
@@ -67,10 +67,10 @@ export default function(state: any = initialState, action: any) {
       newState = {};
       item = state.byIds[id];
 
-      if (item.sold) {
+      if (item.ordered) {
         console.log('is cancelled');
         newState = addTransaction(state, 'buyer', buyerId, item.price, 'credit');
-      } else if (!item.sold) {
+      } else if (!item.ordered) {
         console.log('is ordered');
         newState = addTransaction(state, 'buyer', buyerId, item.price*-1, 'debit');
       }
@@ -82,8 +82,8 @@ export default function(state: any = initialState, action: any) {
           ...state.byIds,
           [id]: {
             ...state.byIds[id],
-            sold: !state.byIds[id].sold,
-            buyerId: state.byIds[id].sold ? null : buyerId
+            ordered: !state.byIds[id].ordered,
+            buyerId: state.byIds[id].ordered ? null : buyerId
           }
         }
       }
