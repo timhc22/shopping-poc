@@ -44,7 +44,7 @@ const Item = ({ item, toggleItemStatus, readOnly = false, sellerId, buyerId }: I
           item && item.sold && 'item__text--sold'
         )}>Price: {item.price}$BSN,</span>
         <span>&nbsp;</span>
-        <span>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'}</span>
+        <span>{item.sellerId ? `Seller: ${item.sellerId}` : 'Seller: no seller'},</span>
         <span>&nbsp;</span>
         <span>
           {item.buyerId ? `Buyer: ${item.buyerId}` : 'Buyer: no buyer'}
