@@ -5,6 +5,8 @@ import ForSaleList from "../../components/ForSaleList";
 import ItemStateFilters from "../../components/ItemStateFilters";
 import UserBalance from "../../components/UserBalance";
 import TransactionsList from "../../components/TransactionsList";
+import CreditAccount from "../../components/CreditAccount";
+import {Divider} from "@material-ui/core";
 
 export default function SellerPage(props: any): JSX.Element {
   const sellerId = parseInt(props.match.params.id);
@@ -16,7 +18,9 @@ export default function SellerPage(props: any): JSX.Element {
       </Link>
 
       <h1>Seller {sellerId}</h1>
+      <CreditAccount type="seller" id={sellerId} />
       <UserBalance type="seller" id={sellerId}/>
+      <Divider/>
       <br/>
       <ListItem sellerId={sellerId} />
       <br/>
