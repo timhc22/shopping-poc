@@ -50,18 +50,18 @@ export default function(state: any = initialState, action: any) {
       const { id, buyerId } = action.payload;
       let newState = {};
       let item = state.byIds[id];
-      console.log(item);
 
       if (item.sold) {
         console.log('is cancelled');
-        newState = addTransaction(state, item.type, id, item.amount*-1, 'debit');
+        newState = addTransaction(state, 'buyer', id, item.price*-1, 'debit');
       } else if (!item.sold) {
         console.log('is ordered');
-        newState = addTransaction(state, item.type, id, item.amount, 'credit');
+        newState = addTransaction(state, 'buyer', id, item.price, 'credit');
       }
 
       newState = {
-        ...state,
+        ...newState,
+        // can use state here as have only changed the transactions states above
         byIds: {
           ...state.byIds,
           [id]: {
@@ -71,7 +71,6 @@ export default function(state: any = initialState, action: any) {
           }
         }
       }
-
       return newState;
     }
     case CREDIT_ACCOUNT: {
