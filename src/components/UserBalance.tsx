@@ -20,7 +20,6 @@ const UserBalance = ({ transactions, type, id }: UserBalanceProps ) => {
           <td>{t.id}&emsp;</td>
           <td>Transaction: {t.transactionType}&nbsp;</td>
           <td>{t.amount}&emsp;</td>
-          <br/>
         </tr>
         ))}
         </tbody>
