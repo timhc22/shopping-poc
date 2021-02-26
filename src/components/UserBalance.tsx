@@ -9,24 +9,6 @@ type UserBalanceProps = {
 }
 
 const UserBalance = ({ transactions, type, id }: UserBalanceProps ) => {
-  if (type == '' && id == '') {
-    return (
-      <table className="transactions table-style">
-        <tbody>
-        { transactions.slice(0).reverse().map(t => (
-        <tr key={t.timestamp}>
-          <td>Timestamp: {t.timestamp}&emsp;</td>
-          <td>Id: {t.type}&nbsp;</td>
-          <td>{t.id}&emsp;</td>
-          <td>Transaction: {t.transactionType}&nbsp;</td>
-          <td>{t.amount}&emsp;</td>
-        </tr>
-        ))}
-        </tbody>
-      </table>
-    )
-  }
-
   let userTotal = 0;
 
   const userTransactions = transactions.map(t => {

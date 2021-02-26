@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import UserBalance from "../../components/UserBalance";
+import TransactionsList from "../../components/TransactionsList";
 
 export default function TransactionsPage(): JSX.Element {
 
@@ -11,7 +11,7 @@ export default function TransactionsPage(): JSX.Element {
       </Link>
 
       <h1>Transactions</h1>
-      <UserBalance type="" id="" />
+      <TransactionsList type="" id="" />
     </div>
   );
 }
