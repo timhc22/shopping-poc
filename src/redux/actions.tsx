@@ -10,12 +10,9 @@ import {
  * Items
  */
 
-let nextItemId = 7; // todo get this dynamically
-
 export const listItem = (sellerId: number, content: any, price: number) => ({
   type: LIST_ITEM,
   payload: {
-    id: ++nextItemId,
     sellerId,
     content,
     price

@@ -26,7 +26,11 @@ const initialState = {
 export default function(state: any = initialState, action: any) {
   switch (action.type) {
     case LIST_ITEM: {
-      const { id, content, sellerId, price } = action.payload;
+      const { content, sellerId, price } = action.payload;
+
+      let id = Math.max.apply(Math, state.allIds);
+      id = ++id;
+
       return {
         ...state,
         allIds: [...state.allIds, id],
