@@ -23,7 +23,7 @@ function App() : JSX.Element {
         <Toolbar>
           <Typography variant="h6" >
             <Link to="/" className="logo">
-              Boson Protocol
+              Shopping
             </Link>
           </Typography>
         </Toolbar>

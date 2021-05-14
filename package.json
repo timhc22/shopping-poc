@@ -30,7 +30,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "update-install": "npm update; npm install"
+    "update-install": "npm update; npm install",
+    "deploy": "npm run build; aws --profile unegma s3 sync --delete ./build/ s3://shopping.unegma.work/"
   },
   "eslintConfig": {
     "extends": [
