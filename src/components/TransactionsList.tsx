@@ -74,7 +74,7 @@ const TransactionsList = ({ transactions, type, id }: TransactionsProps ) => {
                 <TableCell>{tr.timestamp}&emsp;</TableCell>
                 <TableCell>{tr.type}&nbsp;{tr.id}&emsp;</TableCell>
                 <TableCell>{tr.transactionType}&nbsp;</TableCell>
-                <TableCell>{tr.amount} $BSN&emsp;</TableCell>
+                <TableCell>{tr.amount} $SHC&emsp;</TableCell>
               </TableRow>
             ))}
           </TableBody>

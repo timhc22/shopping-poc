@@ -24,7 +24,7 @@ const UserBalance = ({ transactions, items, type, id }: UserBalanceProps ) => {
     }
     return (
       <div className="user-balance">
-        <TextField id="outlined-basic" variant="outlined" value={`Balance: ${userTotal} $BSN`} />
+        <TextField id="outlined-basic" variant="outlined" value={`Balance: ${userTotal} $SHC`} />
       </div>
     )
   }
@@ -38,7 +38,7 @@ const UserBalance = ({ transactions, items, type, id }: UserBalanceProps ) => {
   }).filter(e=>e);
 
   return (
-    <div className="user-balance"><TextField id="outlined-basic" variant="outlined" value={`Balance: ${userTotal} $BSN`} /><br/><br/>
+    <div className="user-balance"><TextField id="outlined-basic" variant="outlined" value={`Balance: ${userTotal} $SHC`} /><br/><br/>
       { id && type && typeof id === 'number' ? <CreditAccount type={type} id={id} /> : '' }
     </div>
   )

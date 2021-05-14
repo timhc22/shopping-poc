@@ -27,7 +27,7 @@ const Item = ({ item, toggleItemStatus, dispatchItem, complainItem, completeItem
       <TableRow className="item">
         <TableCell></TableCell>
         <TableCell>{item.content}</TableCell>
-        <TableCell>{item.price}$BSN</TableCell>
+        <TableCell>{item.price}$SHC</TableCell>
         <TableCell>
           <Link to={`/seller/${item.sellerId}`} className="button">
             {item.sellerId ? `${item.sellerId}` : 'no seller'}
@@ -40,9 +40,9 @@ const Item = ({ item, toggleItemStatus, dispatchItem, complainItem, completeItem
         </TableCell>
         <TableCell>
           {!item.ordered ? 'not sold' : ''}
-          {item.ordered && (!item.complete && !item.complained) ? `ordered (${item.price}$BSN in escrow)` : ''} { (item.ordered && item.buyerId === buyerId) || (item.ordered && item.sellerId === sellerId) ? `| Dispatched: ${item.dispatched}` : ''}
-          {item.complete ? `complete (+${item.price}$BSN to Seller ${item.sellerId})`: ''}
-          {item.complained ? `complained (+${item.price}$BSN to Buyer ${item.buyerId})` : ''}
+          {item.ordered && (!item.complete && !item.complained) ? `ordered (${item.price}$SHC in escrow)` : ''} { (item.ordered && item.buyerId === buyerId) || (item.ordered && item.sellerId === sellerId) ? `| Dispatched: ${item.dispatched}` : ''}
+          {item.complete ? `complete (+${item.price}$SHC to Seller ${item.sellerId})`: ''}
+          {item.complained ? `complained (+${item.price}$SHC to Buyer ${item.buyerId})` : ''}
         </TableCell>
       </TableRow>
     )
@@ -66,7 +66,7 @@ const Item = ({ item, toggleItemStatus, dispatchItem, complainItem, completeItem
         <TableCell className={cx(
           'item__text',
           item && item.ordered && 'item__text--sold'
-        )}>{item.price}$BSN</TableCell>
+        )}>{item.price}$SHC</TableCell>
         <TableCell>
           <Link to={`/seller/${item.sellerId}`} className="button">
             {item.sellerId ? `${item.sellerId}` : 'no seller'}
